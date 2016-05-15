@@ -1,0 +1,117 @@
+ dpkg-buildpackage -rfakeroot -D -us -uc
+dpkg-buildpackage: source package debootstrap
+dpkg-buildpackage: source version 1.0.81+parrot1
+dpkg-buildpackage: source distribution testing
+dpkg-buildpackage: source changed by Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>
+ dpkg-source --before-build debootstrap
+dpkg-buildpackage: host architecture amd64
+dpkg-source: info: using options from debootstrap/debian/source/options: --compression=gzip
+ fakeroot debian/rules clean
+dh clean
+   dh_testdir
+   dh_auto_clean
+	make -j1 clean
+make[1]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+rm -f devices.tar.gz
+rm -rf dev
+make[1]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+   dh_clean
+ dpkg-source -b debootstrap
+dpkg-source: info: using options from debootstrap/debian/source/options: --compression=gzip
+dpkg-source: info: using source format '3.0 (native)'
+dpkg-source: info: building debootstrap in debootstrap_1.0.81+parrot1.tar.gz
+dpkg-source: info: building debootstrap in debootstrap_1.0.81+parrot1.dsc
+ debian/rules build
+dh build
+   dh_testdir
+   dh_update_autotools_config
+   dh_auto_configure
+   debian/rules override_dh_auto_build
+make[1]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+(echo "default_mirror http://archive.parrotsec.org/parrot"; sed -e "s/debian-archive-keyring.gpg/parrot-archive-keyring.gpg/g" scripts/sid) >scripts/parrot
+make[1]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+   dh_auto_test
+ fakeroot debian/rules binary
+dh binary
+   dh_testroot
+   dh_prep
+   debian/rules override_dh_auto_install
+make[1]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+dh_auto_build
+	make -j1
+make[2]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+rm -rf dev
+mkdir -p dev
+chown 0:0 dev
+chmod 755 dev
+(cd dev && /sbin/MAKEDEV std ptmx fd consoleonly)
+tar --mtime=" Sun, 15 May 2016 01:14:25 +0400" -cf - dev | gzip -9n >devices.tar.gz
+rm -rf dev
+make[2]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+/usr/bin/make install DESTDIR=/home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap
+make[2]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+mkdir -p /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/share/debootstrap/scripts
+mkdir -p /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/sbin
+cp -a scripts/* /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/share/debootstrap/scripts/
+install -o root -g root -m 0644 functions /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/share/debootstrap/
+sed 's/@VERSION@/1.0.81+parrot1/g' debootstrap >/home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/sbin/debootstrap
+chown root:root /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/sbin/debootstrap
+chmod 0755 /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/sbin/debootstrap
+install -o root -g root -m 0644 devices.tar.gz /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap/usr/share/debootstrap/
+make[2]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+/usr/bin/make install DESTDIR=/home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb
+make[2]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+mkdir -p /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/share/debootstrap/scripts
+mkdir -p /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/sbin
+cp -a scripts/* /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/share/debootstrap/scripts/
+install -o root -g root -m 0644 functions /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/share/debootstrap/
+sed 's/@VERSION@/1.0.81+parrot1/g' debootstrap >/home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/sbin/debootstrap
+chown root:root /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/sbin/debootstrap
+chmod 0755 /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/sbin/debootstrap
+install -o root -g root -m 0644 devices.tar.gz /home/eclipse/Desktop/repo/debootstrap/debootstrap/debian/debootstrap-udeb/usr/share/debootstrap/
+make[2]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+# remove scripts not needed by d-i
+rm -f debian/debootstrap-udeb/usr/share/debootstrap/scripts/potato \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/woody \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/sarge \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/warty \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/hoary \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/breezy \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/dapper \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/edgy \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/feisty \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/*.buildd \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/*.fakechroot \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/stable \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/testing \
+	debian/debootstrap-udeb/usr/share/debootstrap/scripts/unstable
+make[1]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+   dh_installdocs
+   dh_installchangelogs
+   dh_installman
+   dh_perl
+   dh_link
+   dh_strip_nondeterminism
+   dh_compress
+   dh_fixperms
+   dh_installdeb
+   debian/rules override_dh_gencontrol
+make[1]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+dh_gencontrol -- -Vkeyring=debian-archive-keyring
+make[1]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+   dh_md5sums
+   debian/rules override_dh_builddeb
+make[1]: ingresso nella directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+dh_builddeb -pdebootstrap      -- -Zgzip
+dpkg-deb: generazione del pacchetto "debootstrap" in "../debootstrap_1.0.81+parrot1_all.deb".
+dh_builddeb -pdebootstrap-udeb -- -Zxz
+dpkg-deb: generazione del pacchetto "debootstrap-udeb" in "debian/.debhelper/scratch-space/build-debootstrap-udeb/debootstrap-udeb_1.0.81+parrot1_all.deb".
+	Renaming debootstrap-udeb_1.0.81+parrot1_all.deb to debootstrap-udeb_1.0.81+parrot1_all.udeb
+make[1]: uscita dalla directory "/home/eclipse/Desktop/repo/debootstrap/debootstrap"
+ dpkg-genchanges  >../debootstrap_1.0.81+parrot1_amd64.changes
+dpkg-genchanges: including full source code in upload
+ dpkg-source --after-build debootstrap
+dpkg-source: info: using options from debootstrap/debian/source/options: --compression=gzip
+dpkg-buildpackage: full upload; Debian-native package (full source is included)
+Now running lintian...
+Finished running lintian.
