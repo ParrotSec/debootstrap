@@ -2,7 +2,7 @@ Format: 3.0 (native)
 Source: debootstrap
 Binary: debootstrap, debootstrap-udeb
 Architecture: all
-Version: 1.0.81+parrot1
+Version: 1.0.81+parrot2
 Maintainer: Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>
 Uploaders: Junichi Uekawa <dancer@debian.org>, Colin Watson <cjwatson@debian.org>, Christian Perrier <bubulle@debian.org>, Steve McIntyre <93sam@debian.org>
 Standards-Version: 3.9.8
@@ -13,8 +13,8 @@ Package-List:
  debootstrap deb admin extra arch=all
  debootstrap-udeb udeb debian-installer extra arch=all
 Checksums-Sha1:
- 5646825b00491c01d4879f870bba7168c4665716 63426 debootstrap_1.0.81+parrot1.tar.gz
+ 8ba78a306d8a4bfdf3591a4d6a1a3bfc38ca6228 63946 debootstrap_1.0.81+parrot2.tar.gz
 Checksums-Sha256:
- 623ee1cd673c45a9ae2613fc35cd9b0325a0feb8cd9dfccd54f5d3540e5a264c 63426 debootstrap_1.0.81+parrot1.tar.gz
+ f09ea8aed61eb3b9c367aa1783ace933c7e8703be86a10a52c60156cd6624057 63946 debootstrap_1.0.81+parrot2.tar.gz
 Files:
- dd30ca2a2ded0595126f894b82621270 63426 debootstrap_1.0.81+parrot1.tar.gz
+ bc6ac3d7383fd951917e8a422e0a6d6d 63946 debootstrap_1.0.81+parrot2.tar.gz
