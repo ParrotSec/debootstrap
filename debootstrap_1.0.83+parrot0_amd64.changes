@@ -1,0 +1,53 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Tue, 27 Sep 2016 23:35:38 +0200
+Source: debootstrap
+Binary: debootstrap debootstrap-udeb
+Architecture: source all
+Version: 1.0.83+parrot0
+Distribution: testing
+Urgency: medium
+Maintainer: Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>
+Changed-By: Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
+Description:
+ debootstrap - Bootstrap a basic Debian system
+ debootstrap-udeb - Bootstrap the Debian system (udeb)
+Changes:
+ debootstrap (1.0.83+parrot0) testing; urgency=medium
+ .
+   * Increment version to overwrite new debian version
+Checksums-Sha1:
+ 57ec3cbb7afa61316ed796c8c106e7536e0d07d2 1839 debootstrap_1.0.83+parrot0.dsc
+ 5aa1b633f76545e2e5e693604d32f628903b2d93 64015 debootstrap_1.0.83+parrot0.tar.gz
+ acf273b807b1c5a8ba8c06eb211f38820b9e5130 18984 debootstrap-udeb_1.0.83+parrot0_all.udeb
+ a9da49d6ac587965c3c342f24c15daa79d757469 66582 debootstrap_1.0.83+parrot0_all.deb
+Checksums-Sha256:
+ 7505a78e4966792c9954d1f947cf90d15f6a41cab5295757fbc4d529847d85a2 1839 debootstrap_1.0.83+parrot0.dsc
+ cd854fe1e9d6adb565cccddc2e2de75ff0830aaddd4e3a7827d7f830c0282642 64015 debootstrap_1.0.83+parrot0.tar.gz
+ 9aac577dfada8d39947d3516d98f7ba49bc75c00473211341b3cdbcd85e60415 18984 debootstrap-udeb_1.0.83+parrot0_all.udeb
+ 276eb6393469c2172665fe9f4bb0f2ef48c7216ecfe29410c893191d5011666c 66582 debootstrap_1.0.83+parrot0_all.deb
+Files:
+ 301fa323651067168ea708cc46134737 1839 admin extra debootstrap_1.0.83+parrot0.dsc
+ 502329269677d10b6ceb49c65e2db907 64015 admin extra debootstrap_1.0.83+parrot0.tar.gz
+ 543a3b0402a5ef9d01ff9f10efc31b1f 18984 debian-installer extra debootstrap-udeb_1.0.83+parrot0_all.udeb
+ 0b3185e0e851825c9886fd4a9b4e2356 66582 admin extra debootstrap_1.0.83+parrot0_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBCgAGBQJX6ua1AAoJEHGs4WSSiv5qgrUQAKHI8J+kHbHk/3pJLWUnO9Qf
+doS3vfCrFhO6relYyGeEzEcLTlC6tgDAr+d3LPZhim1LMvy9Sy2Kxr/+XHMFrmnK
+2mrDWeMRR4/gjfmtkkYdO2UEjnIRpdm2OFBVbbMSczELssaGQxdiEYcAxQ6YEHOE
+MscrK3Aq9qzWGe766LJy0vekr95jSqVPXPr4cWoChUIr6usBla7gE/WxHLXhekMI
+aCnBOW0aE/Zp/mFOLn7c++F80tBvaB8EqVj8bU6fMs6CSaU7d60nQFIl5aUHBmt/
+ZmBZqAiqwx7atjpEnSWreHBXbfjSkU757fqs7Q1Z6c6IFeZBgXq535Kx+EBWi1T3
+mX6VahR7I9jlW1wI0DGMW+cd8CX8XgRHhPUb6gEqQYULY/uBBelQSu2VdZFdxeed
+ZvZQpz/0zm+MZuiKowd1i0hdoM45sE3D2/qzSCbmR3+yMtJaxnsS2DhNk3aL7CO6
+CXtOTSFEvCbw9PTRAdX4yO36ji/uLB2K2bAzoUZgbYNAxXY4vmUU/3ZlcnvDQyhr
+1sMYN6qKk2gUZ2aleCkU/hTiMT2vJQl7XvF/AD4vzYC0k/WxcfWepLus/NQSxsSs
+ht9HrwNKDlx+DPzLN9As3AicfHo53Rfo7j2KePlCSkwrKp37gwf+uV8aMLAsEmCo
+F4oPHTWdFaqjAvOffYmW
+=SGGH
+-----END PGP SIGNATURE-----
