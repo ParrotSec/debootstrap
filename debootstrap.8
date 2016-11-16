@@ -26,7 +26,7 @@ can be an http:// or https:// URL, a file:/// URL, or an ssh:/// URL.
 .PP
 The
 .I SUITE
-may be a release code name (eg, sid, jessie, wheezy)
+may be a release code name (eg, sid, stretch, jessie)
 or a symbolic name (eg, unstable, testing, stable, oldstable)
 .PP
 Notice that file:/ URLs are translated to file:/// (correct scheme as
@@ -71,18 +71,23 @@ or apt, and that it is far better to specify the entire base system than
 rely on this option.
 With this option set, this behaviour is disabled.
 .IP
-.IP "\fB\-\-variant=minbase|buildd|fakechroot|scratchbox\fP"
+.IP "\fB\-\-variant=minbase|buildd|fakechroot\fP"
 Name of the bootstrap script variant to use.
 Currently, the variants supported are minbase, which only includes
 essential packages and apt; buildd, which installs the build-essential
 packages into
 .IR TARGET ;
 and fakechroot, which installs the packages without root privileges.
-Finally there is variant scratchbox, which is for creating targets
-for scratchbox usage.
 The default, with no \fB\-\-variant=X\fP argument, is to create a base
 Debian installation in
 .IR TARGET .
+.IP
+.IP "\fB\-\-merged-usr\fP"
+Create /{bin,sbin,lib}/ symlinks pointing to their counterparts in /usr/.
+.IP
+.IP "\fB\-\-no-merged-usr\fP"
+Do not create /{bin,sbin,lib}/ symlinks pointing to their counterparts in /usr/.
+(Default.)
 .IP
 .IP "\fB\-\-keyring=KEYRING\fP"
 Override the default keyring for the distribution being bootstrapped,
@@ -160,16 +165,16 @@ Read the private key from file
 .SH EXAMPLES
 .
 .PP 
-To setup a \fIwheezy\fR system:
+To setup a \fIstretch\fR system:
 .PP 
-     debootstrap wheezy ./wheezy-chroot http://httpredir.debian.org/debian
+     debootstrap stretch ./stretch-chroot http://deb.debian.org/debian
 .PP
-     debootstrap wheezy ./wheezy-chroot file:///LOCAL_MIRROR/debian
+     debootstrap stretch ./stretch-chroot file:///LOCAL_MIRROR/debian
 .PP
 Full process to create a complete Debian installation of \fIsid\fR (unstable)
 in a chroot:
 .PP
-     main # debootstrap sid sid-root http://httpredir.debian.org/debian/
+     main # debootstrap sid sid-root http://deb.debian.org/debian/
      [ ... watch it download the whole system ]
      main # echo "proc sid-root/proc proc defaults 0 0" >> /etc/fstab
      main # mount proc sid-root/proc -t proc

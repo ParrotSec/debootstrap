@@ -1,28 +1,80 @@
-debootstrap (1.0.83+parrot0) testing; urgency=medium
+debootstrap (1.0.87) unstable; urgency=high
 
-  * Increment version to overwrite new debian version
+  [ Julien Cristau ]
+  * Default to split /usr again, as merged-/usr breaks dpkg-shlibdeps
+    (closes: #844221).
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 27 Sep 2016 23:35:38 +0200
+  [ Riku Voipio ]
+  * remove scratchbox2 support (closes: #796189)
 
-debootstrap (1.0.81+parrot2) testing; urgency=medium
+ -- Christian Perrier <bubulle@debian.org>  Wed, 16 Nov 2016 06:47:27 +0100
 
-  * Don't remove stable and testing scripts from debian-installer
+debootstrap (1.0.86) unstable; urgency=high
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Mon, 18 Jul 2016 20:09:41 +0200
+  * Rework split_inline_sig by using shell built-ins instead of trying to
+    mix sed and tr together, which might work on regular systems but not
+    from inside the Debian Installer (Closes: #842591). Thanks to Ansgar
+    Burchardt for the proof of concept!
 
-debootstrap (1.0.81+parrot1) testing; urgency=medium
+ -- Cyril Brulebois <kibi@debian.org>  Sun, 30 Oct 2016 23:35:45 +0100
 
-  * Minor fixes to parrot scripts
+debootstrap (1.0.85) unstable; urgency=medium
 
- -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Sun, 15 May 2016 01:14:25 +0400
+  [ Julien Cristau ]
+  * Add support for downloading and validating InRelease files, by splitting
+    up detached signature from signed data.
+  * Switch default mirror to deb.debian.org.
 
-debootstrap (1.0.81+parrot0) testing; urgency=medium
+  [ Colin Watson ]
+  * Add (Ubuntu) zesty as a symlink to gutsy.
 
-  * Sync with Debian. Remaining changes:
-    - add parrot specific bootstrap scripts
-    - use parrot-archive-keyring instead of debian-archive-keyring in Recommends
+  [ Ansgar Burchardt ]
+  * Add jessie-kfreebsd to merged-/usr blacklist.
+  * No longer Build-Depend on makedev. The code using it was already
+    removed in debootstrap 1.0.82.
+  * Do not use `tar -k` for older releases which might have file
+    conflicts between the packages to be installed. (Closes: #838388)
+  * Error out when seeing short options. (Closes: #548880)
+  * Add oldoldstable -> sid script symlink. (Closes: #792734)
+  * Add buster -> sid and bullseye -> sid script symlinks.
+  * Only unpack and configure the base system when there are actually
+    packages to install. (Closes: #825034)
+  * debootstrap.8: Use stretch instead of wheezy in examples.
 
- -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Wed, 11 May 2016 11:14:38 +0400
+  [ Marco d'Itri ]
+  * Enable merged-/usr by default. (Closes: #839046)
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 21 Oct 2016 20:22:49 +0200
+
+debootstrap (1.0.84) unstable; urgency=medium
+
+  [ Ansgar Burchardt ]
+  * Add support for xz-compressed Packages indices. (Closes: #837649)
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 06 Oct 2016 06:59:38 +0200
+
+debootstrap (1.0.83) unstable; urgency=medium
+
+  [ Ansgar Burchardt ]
+  * functions: Validate that the requested suite is listed in the
+    Release file's Suite or Codename field. (Closes: #837075)
+  * Add support for merged-/usr, enabled by a new --merged-usr option.
+    (Closes: #810301)
+  * Feign install of dpkg in second stage. This avoids problems when
+    using dpkg-deb together with busybox' tar. (Closes: #837185)
+  * README: Use https://.
+
+  [ Steve McIntyre ]
+  * Update Standards-Version to 3.9.8 (no changes needed)
+
+ -- Steve McIntyre <93sam@debian.org>  Tue, 13 Sep 2016 13:16:41 +0100
+
+debootstrap (1.0.82) unstable; urgency=medium
+
+  [ Alex Bennée ]
+  * Excise all devices.tar.gz code. Closes: #830869
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 08 Sep 2016 07:09:56 +0200
 
 debootstrap (1.0.81) unstable; urgency=medium
 
@@ -30,14 +82,6 @@ debootstrap (1.0.81) unstable; urgency=medium
   * Add (Ubuntu) yakkety as a symlink to gutsy.
 
  -- Christian Perrier <bubulle@debian.org>  Tue, 03 May 2016 06:51:57 +0200
-
-debootstrap (1.0.80+parrot0) testing; urgency=medium
-
-  * Sync with Debian. Remaining changes:
-    - random fixes
-    - use parrot-archive-keyring instead of debian-archive-keyring
-
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 28 Apr 2016 13:56:48 +0200
 
 debootstrap (1.0.80) unstable; urgency=medium
 
@@ -112,7 +156,6 @@ debootstrap (1.0.75) unstable; urgency=medium
      - dasyatis
 
  -- Cyril Brulebois <kibi@debian.org>  Wed, 11 Nov 2015 18:49:28 +0100
-
 
 debootstrap (1.0.74) unstable; urgency=medium
 

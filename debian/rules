@@ -5,11 +5,7 @@ ifeq (0,$(shell dpkg-vendor --derives-from Ubuntu; echo $$?))
 else ifeq (0,$(shell dpkg-vendor --derives-from Tanglu; echo $$?))
   KEYRING := tanglu-archive-keyring
 else
-  ifeq (0,$(shell dpkg-vendor --derives-from Parrot; echo $$?))
-    KEYRING := parrot-archive-keyring
-  else
-    KEYRING := debian-archive-keyring
-  endif
+  KEYRING := debian-archive-keyring
 endif
 
 %:
@@ -17,7 +13,6 @@ endif
 
 # need to be root to make devices, so build is done in install target
 override_dh_auto_build:
-	(echo "default_mirror http://archive.parrotsec.org/parrot"; sed -e "s/debian-archive-keyring.gpg/parrot-archive-keyring.gpg/g" scripts/sid) >scripts/parrot
 
 override_dh_auto_install:
 	dh_auto_build
@@ -37,6 +32,8 @@ override_dh_auto_install:
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/feisty \
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/*.buildd \
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/*.fakechroot \
+		debian/debootstrap-udeb/usr/share/debootstrap/scripts/stable \
+		debian/debootstrap-udeb/usr/share/debootstrap/scripts/testing \
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/unstable
 
 override_dh_gencontrol:
