@@ -1,3 +1,9 @@
+debootstrap (1.0.87+parrot0) testing; urgency=medium
+
+  * Import new Debian release
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 06 Jan 2017 22:19:06 +0100
+
 debootstrap (1.0.87) unstable; urgency=high
 
   [ Julien Cristau ]
@@ -76,12 +82,41 @@ debootstrap (1.0.82) unstable; urgency=medium
 
  -- Christian Perrier <bubulle@debian.org>  Thu, 08 Sep 2016 07:09:56 +0200
 
+
+debootstrap (1.0.81+parrot2) testing; urgency=medium
+
+  * Don't remove stable and testing scripts from debian-installer
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Mon, 18 Jul 2016 20:09:41 +0200
+
+debootstrap (1.0.81+parrot1) testing; urgency=medium
+
+  * Minor fixes to parrot scripts
+
+ -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Sun, 15 May 2016 01:14:25 +0400
+
+debootstrap (1.0.81+parrot0) testing; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - add parrot specific bootstrap scripts
+    - use parrot-archive-keyring instead of debian-archive-keyring in Recommends
+
+ -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Wed, 11 May 2016 11:14:38 +0400
+
 debootstrap (1.0.81) unstable; urgency=medium
 
   [ Luca Falavigna ]
   * Add (Ubuntu) yakkety as a symlink to gutsy.
 
  -- Christian Perrier <bubulle@debian.org>  Tue, 03 May 2016 06:51:57 +0200
+
+debootstrap (1.0.80+parrot0) testing; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - random fixes
+    - use parrot-archive-keyring instead of debian-archive-keyring
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 28 Apr 2016 13:56:48 +0200
 
 debootstrap (1.0.80) unstable; urgency=medium
 
@@ -482,7 +517,7 @@ debootstrap (1.0.40) unstable; urgency=low
 
   [ Joey Hess ]
   * When installation or configuration of a package fails, output a message
-    that points the user to the log file. Attempt to grep out the first 
+    that points the user to the log file. Attempt to grep out the first
     package that dpkg failed on and show its name too. Closes: #472704
 
   [ Colin Watson ]
@@ -503,7 +538,7 @@ debootstrap (1.0.39) unstable; urgency=low
 debootstrap (1.0.38) unstable; urgency=low
 
   [ Joey Hess ]
-  * Improve error message when a decompressor is not available, 
+  * Improve error message when a decompressor is not available,
     to indicate which package has been built with bzip today.
     Closes: #644719
 
@@ -637,7 +672,7 @@ debootstrap (1.0.28) unstable; urgency=low
   [ Joey Hess ]
   * Remove 5 second sleeps when debootstrap finds additional required
     dependencies. d-i just got that much faster.
-  * Use SHA checksums. Defaulting to SHA256, and configurable by 
+  * Use SHA checksums. Defaulting to SHA256, and configurable by
     SHA_SIZE environment variable. Closes: #614315
   * If a sha256sum program is not available, fall back to sha1sum.
     This is to support debootstrap use on embedded systems, which are more
@@ -651,7 +686,7 @@ debootstrap (1.0.27) unstable; urgency=low
 
   [ Miguel Figueiredo ]
   * Fix bug and typo on --private-key
-    Patch by Jonathan Klee. 
+    Patch by Jonathan Klee.
 
   [ Jeremie Koenig ]
   * Hurd support:
@@ -687,7 +722,7 @@ debootstrap (1.0.25) unstable; urgency=low
 debootstrap (1.0.24) unstable; urgency=low
 
   [ Miguel Figueiredo ]
-  * Apply patches from by Jonathan Klee and Guillaume Chauvel 
+  * Apply patches from by Jonathan Klee and Guillaume Chauvel
     to add support to https (closes: #521196).
 
   [ Colin Watson ]
@@ -773,7 +808,7 @@ debootstrap (1.0.19) unstable; urgency=low
 
 debootstrap (1.0.18) unstable; urgency=low
 
-  * Only use dpkg from the chroot, as there is no guarantee dpkg is 
+  * Only use dpkg from the chroot, as there is no guarantee dpkg is
     available outside of the chroot (d-i installation for example).
 
  -- Aurelien Jarno <aurel32@debian.org>  Wed, 23 Sep 2009 11:37:01 +0200
@@ -1359,7 +1394,7 @@ debootstrap (0.2.43) unstable; urgency=high
 debootstrap (0.2.42) unstable; urgency=high
 
   * Acknowledge NMUs. (Closes: #262137, #262165, #262178, #262375)
-  * [sarge] Switch to libgnutls11 so exim4 can switch. (Closes: #268325) 
+  * [sarge] Switch to libgnutls11 so exim4 can switch. (Closes: #268325)
   * [sid] Removed "gcc-3.0-base" and "libstdc++3" for HPPA as they have been
     removed from sid. (Closes: #268049)
   * [Makefile] Make the regular video devices on all archs. (Closes: #265081)
@@ -1398,7 +1433,7 @@ debootstrap (0.2.41) unstable; urgency=high
     systems (e.g. #212646) and there is a consensus it is no longer needed in
     a base environment.
   * [sarge, sid] Removed aboot, aboot-base, elilo, efibootmgr, silo, dvhtool,
-    delo, palo, vmelilo. As per the consensus reached in the thread starting 
+    delo, palo, vmelilo. As per the consensus reached in the thread starting
     with http://lists.debian.org/debian-boot/2004/04/msg00634.html, the
     installation of boot loaders is now debian-installer's responsibility.
     (Closes: #247906)
@@ -1441,7 +1476,7 @@ debootstrap (0.2.39) unstable; urgency=medium
   * [woody.buildd] Install libperl5.6. Thanks Rene Engelhard. (Closes: #251702)
   * [sarge.buildd] Install libc6.1 rather than libc6 on alpha. Thanks Rene
     Engelhard. (Closes: #251703)
-  
+
   Goswin von Brederlow <brederlo@informatik.uni-tuebingen.de>
   * Copy script for sarge to sid
   * Add handling for amd64 to sarge/sid scripts
@@ -1545,7 +1580,7 @@ debootstrap (0.2.29) unstable; urgency=low
 debootstrap (0.2.28) unstable; urgency=medium
 
   * [sid] Exim has changed GnuTLS dependencies. Added libgnutls10, libgcrypt7,
-    libgpg-error0, libopencdk8, libtasn1-2; dropped libgnutls7, libgcrypt1, 
+    libgpg-error0, libopencdk8, libtasn1-2; dropped libgnutls7, libgcrypt1,
     libtasn1-0.
   * [sarge,sid] Dropped lilo, mbr, modconf, libdevmapper1.00 as
     debian-installer handles the bootloader installation and modules
