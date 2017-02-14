@@ -1,3 +1,9 @@
+debootstrap (1.0.87+parrot1) testing; urgency=medium
+
+  * Re-include stable and testing scripts in d-i package
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 14 Feb 2017 03:42:48 +0100
+
 debootstrap (1.0.87+parrot0) testing; urgency=medium
 
   * Import new Debian release
