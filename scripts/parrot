@@ -1,4 +1,4 @@
-default_mirror http://mirrordirector.archive.parrotsec.org/parrot
+default_mirror http://deb.parrotsec.org/parrot
 mirror_style release
 download_style apt
 finddebs_style from-indices

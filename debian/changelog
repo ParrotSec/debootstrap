@@ -1,3 +1,16 @@
+debootstrap (1.0.88+parrot0) testing; urgency=medium
+
+  * Update parrot mirror address.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 05 Jul 2017 13:46:27 +0200
+
+debootstrap (1.0.88) unstable; urgency=high
+
+  [ Sven Joachim ]
+  * Strip the arch-qualifier (Closes: #836525)
+
+ -- Steve McIntyre <93sam@debian.org>  Wed, 08 Feb 2017 23:53:10 +0000
+
 debootstrap (1.0.87+parrot1) testing; urgency=medium
 
   * Re-include stable and testing scripts in d-i package
