@@ -899,7 +899,7 @@ extract_ar_deb_field () {
 		*) error 1 UNKNOWNCONTROLCOMP "Unknown compression type for %s in %s" "$tarball" "$pkg" ;;
 	esac
 
-	if type $cat_cmd >/dev/null 2>&1; then
+	if in_path $cat_cmd; then
 		ar -p "$pkg" "$tarball" | $cat_cmd |
 		    tar -O -xf - control ./control 2>/dev/null |
 		    grep -i "^$field:" | sed -e 's/[^:]*: *//' | head -n 1
@@ -920,7 +920,7 @@ extract_ar_deb_data () {
 		*) error 1 UNKNOWNDATACOMP "Unknown compression type for %s in %s" "$tarball" "$pkg" ;;
 	esac
 
-	if type $cat_cmd >/dev/null 2>&1; then
+	if in_path $cat_cmd; then
 		ar -p "$pkg" "$tarball" | $cat_cmd | tar $EXTRACT_DEB_TAR_OPTIONS -xf -
 	else
 		error 1 UNPACKCMDUNVL "Extracting %s requires the %s command, which is not available" "$pkg" "$cat_cmd"
@@ -944,7 +944,7 @@ choose_extractor () {
 
 	if [ -n "$EXTRACTOR_OVERRIDE" ]; then
 		extractor="$EXTRACTOR_OVERRIDE"
-	elif type dpkg-deb >/dev/null 2>&1; then
+	elif in_path dpkg-deb; then
 		extractor="dpkg-deb"
 	else
 		extractor="ar"

@@ -231,7 +231,7 @@ if [ $# != 0 ] ; then
 			error 1 NEEDARG "option requires an argument %s" "$1"
 		fi
 		if valid_extractor "$EXTRACTOR_OVERRIDE"; then
-			if ! type "$EXTRACTOR_OVERRIDE" >/dev/null 2>&1; then
+			if ! in_path "$EXTRACTOR_OVERRIDE"; then
 				error 1 MISSINGEXTRACTOR "The selected extractor cannot be found: %s" "$EXTRACTOR_OVERRIDE"
 			fi
 		else
