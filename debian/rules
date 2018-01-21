@@ -5,7 +5,7 @@ ifeq (0,$(shell dpkg-vendor --derives-from Ubuntu; echo $$?))
 else ifeq (0,$(shell dpkg-vendor --derives-from Tanglu; echo $$?))
   KEYRING := tanglu-archive-keyring
 else
-  KEYRING := debian-archive-keyring
+  KEYRING := parrot-archive-keyring
 endif
 
 %:
@@ -32,9 +32,6 @@ override_dh_auto_install:
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/feisty \
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/*.buildd \
 		debian/debootstrap-udeb/usr/share/debootstrap/scripts/*.fakechroot \
-		debian/debootstrap-udeb/usr/share/debootstrap/scripts/stable \
-		debian/debootstrap-udeb/usr/share/debootstrap/scripts/testing \
-		debian/debootstrap-udeb/usr/share/debootstrap/scripts/unstable
 
 override_dh_gencontrol:
 	dh_gencontrol -- -Vkeyring=$(KEYRING)

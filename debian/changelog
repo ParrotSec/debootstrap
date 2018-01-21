@@ -1,3 +1,10 @@
+debootstrap (1.0.93+parrot2) testing; urgency=medium
+
+  * Include parrot-archive-keyring
+  * Include stable, testing and unstable releases in d-i.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Sun, 21 Jan 2018 03:32:38 +0100
+
 debootstrap (1.0.93+parrot1) testing; urgency=medium
 
   * Import new debian release.
