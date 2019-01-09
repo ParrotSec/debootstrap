@@ -2,9 +2,8 @@ mirror_style release
 download_style apt
 finddebs_style from-indices
 variants - buildd fakechroot minbase
-default_mirror http://archive.debian.org/debian
-keyring /usr/share/keyrings/debian-archive-removed-keys.gpg
-force_md5
+keyring /usr/share/keyrings/kali-archive-keyring.gpg
+default_mirror http://http.kali.org/kali
 
 # include common settings
 if [ -e "$DEBOOTSTRAP_DIR/scripts/debian-common" ]; then

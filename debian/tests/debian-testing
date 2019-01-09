@@ -32,6 +32,26 @@ sub capture {
     return $output;
 }
 
+my $check_non_docker_env;
+if (run([qw(grep docker.*cgroup /proc/1/mountinfo)], '&>', '/dev/null')) {
+    diag("it seems docker environment");
+    $check_non_docker_env = 0;
+}
+else {
+    diag("okay, it's not docker environment");
+    $check_non_docker_env = 1;
+}
+
+my @maybe_unshare_mount_ns;
+
+if (verbose_run(['unshare', '-m', 'true'])) {
+    diag('can unshare mount namespace');
+    @maybe_unshare_mount_ns = ('unshare', '-m');
+}
+else {
+    diag('cannot unshare mount namespace, are we in a container?');
+}
+
 sub check_fake_schroot {
     my %params = @_;
     my $reference = $params{reference};
@@ -40,7 +60,7 @@ sub check_fake_schroot {
 
     # Use unshare -m to make sure the /dev mount gets cleaned up on exit, even
     # on failures
-    my $response = capture([qw(unshare -m),
+    my $response = capture([@maybe_unshare_mount_ns,
         "$srcdir/debian/tests/fake/schroot-$version", @{$extra_argv},
             $params{chroot},
         qw(runuser -u nobody --),
@@ -54,7 +74,7 @@ sub check_fake_pbuilder {
     my $reference = $params{reference};
     my $version = $params{version} || '0.228.4-1';
 
-    my $response = capture([qw(unshare -m),
+    my $response = capture([@maybe_unshare_mount_ns,
         "$srcdir/debian/tests/fake/pbuilder-$version", $params{chroot},
         qw(runuser -u nobody --),
         qw(script -q -c), 'cat /etc/debian_version', '/dev/null']);
@@ -156,7 +176,9 @@ sub check_chroot {
     }
 }
 
-my $mirror = 'http://deb.debian.org/debian';
+# Specify https mirror to check https mirror specific problem
+# https://bugs.debian.org/896071
+my $mirror = 'https://deb.debian.org/debian';
 my $tmp = $ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP};
 die "no autopkgtest temporary directory specified" unless $tmp;
 chdir $tmp or die "chdir $tmp: $!";
@@ -234,15 +256,19 @@ else {
 my $distro_info = DebianDistroInfo->new;
 my $testing = $distro_info->testing;
 
+# Should specify multiple components for checking (see Bug#898738)
 if (!verbose_run(['debootstrap',
             '--include=debootstrap,debian-archive-keyring,gnupg,hello',
             '--variant=minbase',
+            '--components=main,contrib,non-free',
             $testing, 'chroot.d', $mirror], '>&2')) {
     BAIL_OUT("debootstrap failed: $?");
 }
 
-check_chroot(chroot => 'chroot.d', can_mknod_ptmx => $can_mknod_ptmx,
-    kernel => $kernel, container => $container);
+if ($check_non_docker_env) {
+    check_chroot(chroot => 'chroot.d', can_mknod_ptmx => $can_mknod_ptmx,
+        kernel => $kernel, container => $container);
+}
 
 if ($^O ne 'linux') {
     diag("Cannot use systemd-nspawn on non-Linux");
@@ -265,7 +291,7 @@ else {
         BAIL_OUT("debootstrap wrapped in systemd-nspawn failed: $?");
     }
 
-    check_chroot(chroot => 'from-nspawn.d', can_mknod_ptmx => 0,
+    check_chroot(chroot => "$ENV{ADTTMP}/from-nspawn.d", can_mknod_ptmx => 0,
         kernel => $kernel, container => "nspawn");
 }
 

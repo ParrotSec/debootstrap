@@ -13,7 +13,7 @@ system, or if you are testing modifications to debootstrap.
 First, get the source.
 
 * Either by using git
-  git clone https://anonscm.debian.org/git/d-i/debootstrap.git
+  git clone https://salsa.debian.org/installer-team/debootstrap.git
 
 * Or by visiting <https://packages.debian.org/source/sid/debootstrap>
   and downloading the tar.gz file

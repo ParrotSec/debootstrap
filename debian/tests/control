@@ -7,4 +7,5 @@ Depends:
  perl,
  systemd [linux-any],
  systemd-container [linux-any],
+ ca-certificates,
 Restrictions: allow-stderr, needs-root

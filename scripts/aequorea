@@ -89,8 +89,8 @@ second_stage_install () {
 		baseprog="$(($baseprog + ${1:-1}))"
 	}
 
-	if doing_variant fakechroot; then
-		setup_proc_fakechroot
+	if doing_variant fakechroot || [ "$CONTAINER" = "docker" ]; then
+		setup_proc_symlink
 	else
 		setup_proc
 		in_target /sbin/ldconfig

@@ -1,11 +1,18 @@
 case $ARCH in
   amd64|i386)
+	case $SUITE in
+	  gutsy|hardy|intrepid|jaunty|karmic|lucid|maverick|natty|oneiric|precise|quantal|raring|saucy|utopic|vivid|wily|yakkety|zesty)
+	default_mirror http://old-releases.ubuntu.com/ubuntu
+	  ;;
+	  *)
 	default_mirror http://archive.ubuntu.com/ubuntu
+	;;
+	esac
 	;;
   sparc)
 	case $SUITE in
 	  gutsy)
-	default_mirror http://archive.ubuntu.com/ubuntu
+	default_mirror http://old-releases.ubuntu.com/ubuntu
 	;;
 	  *)
 	default_mirror http://ports.ubuntu.com/ubuntu-ports
@@ -60,13 +67,17 @@ work_out_debs () {
 
 first_stage_install () {
 	case "$CODENAME" in
-		etch|etch-m68k|jessie|jessie-kfreebsd|lenny|squeeze|wheezy) ;;
+		# "merged-usr" blacklist for past releases
+		gutsy|hardy|intrepid|jaunty|karmic|lucid|maverick|natty|oneiric|precise|quantal|raring|saucy|trusty|utopic|vivid|wily|xenial|yakkety|zesty|artful|bionic|cosmic)
+			[ -z "$MERGED_USR" ] && MERGED_USR="no"
+			;;
 		*)
+			# see https://bugs.debian.org/838388
 			EXTRACT_DEB_TAR_OPTIONS="$EXTRACT_DEB_TAR_OPTIONS -k"
-			setup_merged_usr
 			;;
 	esac
 
+	setup_merged_usr
 	extract $required
 
 	mkdir -p "$TARGET/var/lib/dpkg"
@@ -80,9 +91,15 @@ first_stage_install () {
 	fi
 
 	setup_devices
+
+        if doing_variant fakechroot || [ "$CONTAINER" = "docker" ]; then
+		setup_proc_symlink
+	fi
 }
 
 second_stage_install () {
+	in_target /bin/true
+
 	setup_dynamic_devices
 
 	x_feign_install () {
@@ -111,9 +128,7 @@ Status: install ok installed" >> "$TARGET/var/lib/dpkg/status"
 		baseprog="$(($baseprog + ${1:-1}))"
 	}
 
-	if doing_variant fakechroot; then
-		setup_proc_fakechroot
-	else
+	if ! doing_variant fakechroot; then
 		setup_proc
 		in_target /sbin/ldconfig
 	fi
