@@ -1,3 +1,9 @@
+debootstrap (2:1.0.114+parrot2) testing; urgency=medium
+
+  * Add lts and rolling flavors.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 19 Jun 2019 12:57:02 +0200
+
 debootstrap (2:1.0.114+parrot1) testing; urgency=medium
 
   * Import new Debian release.

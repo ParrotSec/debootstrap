@@ -1,19 +1,20 @@
 Source: debootstrap
 Section: admin
 Priority: optional
-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Maintainer: Parrot Dev Team <team@parrotsec.org>
 Uploaders: Junichi Uekawa <dancer@debian.org>, Colin Watson <cjwatson@debian.org>, Christian Perrier <bubulle@debian.org>, Steve McIntyre <93sam@debian.org>,
-           Hideki Yamane <henrich@debian.org>,
+           Hideki Yamane <henrich@debian.org>, Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 4.3.0
-Vcs-Browser: https://salsa.debian.org/installer-team/debootstrap
-Vcs-Git: https://salsa.debian.org/installer-team/debootstrap.git
+Vcs-Browser: https://nest.parrotsec.org/debian-packages/debootstrap
+Vcs-Git: https://nest.parrotsec.org/debian-packages/debootstrap.git
 
 Package: debootstrap
 Architecture: all
 Depends: ${misc:Depends}, wget
 Recommends: gnupg, ${keyring}, arch-test (>= 0.11~),
 Suggests: ubuntu-archive-keyring,
+          parrot-archive-keyring,
           squid-deb-proxy-client,
 Description: Bootstrap a basic Debian system
  debootstrap is used to create a Debian base system from scratch,
