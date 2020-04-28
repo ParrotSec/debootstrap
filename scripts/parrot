@@ -1,4 +1,4 @@
-default_mirror http://deb.parrotsec.org/parrot
+default_mirror http://mirror.parrot.sh/mirrors/parrot
 mirror_style release
 download_style apt
 finddebs_style from-indices
@@ -34,11 +34,7 @@ work_out_debs () {
 		required="$required binutils"
 	fi
 
-	case $MIRRORS in
-	    https://*)
-		base="$base ca-certificates"
-		;;
-	esac
+	base="$base ca-certificates"
 }
 
 first_stage_install () {
