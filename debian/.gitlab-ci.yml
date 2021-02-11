@@ -1,0 +1,29 @@
+image: debian:sid
+
+variables:
+  PKG: debootstrap
+
+stages:
+   - build
+#   - autopkgtest
+
+package_build:
+  stage: build
+  script:
+    - apt update -qq
+    - apt build-dep ./ -y -qq
+    - apt install -y -qq dpkg-dev devscripts
+    - dpkg-buildpackage -us -uc
+    - mkdir build && cd ../ && ls -al && dcmd ./${PKG}_*.changes mv ${PKG}/build/
+  artifacts:
+    paths:
+      - build/*
+
+#autopkgtest:
+#  stage: autopkgtest
+#  script:
+#    - apt update -qq
+#    - apt install -y -qq autopkgtest
+#    - autopkgtest build/*.changes -- null
+#  dependencies:
+#    - package_build

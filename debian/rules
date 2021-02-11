@@ -1,17 +1,13 @@
 #! /usr/bin/make -f
 
 ifeq (0,$(shell dpkg-vendor --derives-from Ubuntu; echo $$?))
-  RECOMMENDS := ubuntu-keyring
-  SUGGESTS   := debian-archive-keyring, arch-test (>= 0.11~),
+  KEYRING := ubuntu-keyring
 else ifeq (0,$(shell dpkg-vendor --derives-from Tanglu; echo $$?))
-  RECOMMENDS := tanglu-archive-keyring, arch-test (>= 0.11~),
-  SUGGESTS   := debian-archive-keyring, ubuntu-archive-keyring, binutils, xz-utils, zstd
+  KEYRING := tanglu-archive-keyring
 else ifeq (0,$(shell dpkg-vendor --derives-from Kali; echo $$?))
-  RECOMMENDS := kali-archive-keyring, arch-test (>= 0.11~),
-  SUGGESTS   := debian-archive-keyring, ubuntu-archive-keyring, binutils, xz-utils, zstd
+  KEYRING := kali-archive-keyring
 else
-  RECOMMENDS := debian-archive-keyring, arch-test (>= 0.11~),
-  SUGGESTS   := ubuntu-archive-keyring, binutils, xz-utils, zstd
+  KEYRING := debian-archive-keyring
 endif
 
 %:
@@ -27,7 +23,7 @@ override_dh_auto_install:
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/debootstrap-udeb
 
 override_dh_gencontrol:
-	dh_gencontrol -- -Vdebootstrap:Recommends='$(RECOMMENDS)' -Vdebootstrap:Suggests='$(SUGGESTS)'
+	dh_gencontrol -- -Vkeyring=$(KEYRING)
 
 # Specify gzip to mitigate #770217:
 override_dh_builddeb:

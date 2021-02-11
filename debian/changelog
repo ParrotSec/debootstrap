@@ -1,143 +1,27 @@
-debootstrap (1.0.125+parrot1) lts-updates; urgency=medium
+debootstrap (2:1.0.114+parrot4) rolling; urgency=medium
 
-  * Add Parrot OS to scripts dir.
-  * Add Parrot-specific aliases.
+  * Include devuan ceres and chimaera scripts.
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 02 Sep 2021 16:17:01 +0200
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 11 Feb 2021 18:54:05 +0100
 
-debootstrap (1.0.124) experimental; urgency=medium
+debootstrap (2:1.0.114+parrot3) rolling; urgency=medium
 
-  [ Colin Watson ]
-  * Add (Ubuntu) groovy as a symlink to gutsy.
+  * always include ca-certificates.
 
-  [ Samuel Thibault ]
-  * functions: Turn for loops variables into locals, suggested by jhcha54008.
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 28 Apr 2020 22:29:52 +0200
 
-  [ YunQiang Su ]
-  * stage1: re-mkdir /proc if it is a symlink instead of umount. (Closes: #968927)
+debootstrap (2:1.0.114+parrot2) testing; urgency=medium
 
-  [ Luca Falavigna ]
-  * Add (Ubuntu) hirsute as a symlink to gutsy.
+  * Add lts and rolling flavors.
 
-  [ Tobias Koch ]
-  * Add --inrelease-path option to allow specifying by-hash InRelease
-    location.
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 19 Jun 2019 12:57:02 +0200
 
-  [ Dimitri John Ledkov ]
-  * functions: add zstd control&data support to the ar extractor LP: #1923845
-  * Add (Ubuntu) impish as a symlink to gutsy.
-  * gutsy: sync changes from Ubuntu, to ensure that impish+ are always
-    merged-usr.
-  * gutsy: use --extractor=ar if dpkg-deb has no zstd support (i.e. on
-    Debian & non-Ubuntu derivatives).
-  * rules,control: adjust Recommends/Suggests to be appropriate on each
-    distro.
+debootstrap (2:1.0.114+parrot1) testing; urgency=medium
 
- -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 26 Apr 2021 15:02:44 +0100
+  * Import new Debian release.
+  * Re-include and update parrot templates.
 
-debootstrap (1.0.123) unstable; urgency=medium
-
-  * Reinstate safeguard removed in 1.0.121, which is absolutely needed
-    to avoid unmounting target entirely, as seen when running in d-i
-    with default parameters (Closes: #953849). Vielen Dank, Johannes!
-
- -- Cyril Brulebois <kibi@debian.org>  Sat, 14 Mar 2020 02:07:20 +0100
-
-debootstrap (1.0.122) unstable; urgency=medium
-
-  * Revert the addition of (mandatory) security support as debootstrap's
-    goal is to provide with a basic Debian system that many provisioning
-    systems are built upon. Changing behaviour now seems to be doing a
-    disservice to all those tools that would need adapting. In addition to
-    not seeming to be a good idea, that triggers regressions for a number
-    of use cases (Closes: #953759, #953588, #953593, #953594, #953617).
-
- -- Cyril Brulebois <kibi@debian.org>  Fri, 13 Mar 2020 05:43:24 +0100
-
-debootstrap (1.0.121) unstable; urgency=medium
-
-  * Fix "debootstrapping testing and stable results in exit 100",
-    use CODENAME for check properly (Closes: #953404)
-
- -- Hideki Yamane <henrich@debian.org>  Tue, 10 Mar 2020 21:42:03 +0900
-
-debootstrap (1.0.120) unstable; urgency=medium
-
-  * Check codename for apt-transport-https (Closes: #920255, #879755)
-  * Add security mirror setting (Closes: #939852, #543819)
-
- -- Hideki Yamane <henrich@debian.org>  Sun, 08 Mar 2020 02:01:59 +0900
-
-debootstrap (1.0.119) unstable; urgency=medium
-
-  [ Hideki Yamane ]
-  * Fix: specify --foreign and --unpack-tarball at the same time
-    Thanks to Cel Skeggs <cela@mit.edu> for the patch (Closes: #946783)
-  * Add check rule for systemd-nspawn
-
-  [ Jeremiah C. Foster ]
-  * Adding PureOS 'amber' to scripts dir (Closes: #946476)
-
- -- Hideki Yamane <henrich@debian.org>  Thu, 27 Feb 2020 21:16:24 +0900
-
-debootstrap (1.0.118) unstable; urgency=medium
-
-  * rename .gitlab-ci.yml to salsa-ci.yml
-  * debian/control
-    - use debhelper-compat (= 12) and drop debian/compat
-    - set Standards-Version 4.5.0
-  * debian/tests/debian-testing
-    - use AUTOPKGTEST_TMP instead of obsolete ADTTMP
-  * fix /dev/ptmx mount on chroot and re-enable autopkgtest
-  * fix: don't pass an empty arg to wget when --verbose is applied
-    (Closes: #951367)
-
- -- Hideki Yamane <henrich@debian.org>  Fri, 21 Feb 2020 21:16:39 +0900
-
-debootstrap (1.0.117) unstable; urgency=medium
-
-  [ Simon Quigley ]
-  * Add (Ubuntu) focal as a symlink to gutsy. (Closes: #944976, #946815)
-
-  [ Holger Wansing ]
-  * Remove trailing whitespaces from changelog file, to fix lintian tag.
-
-  [ James Clarke ]
-  * Add a new --extra-suites option to support debootstrapping Debian Ports
-    architectures with essential/required packages in its unreleased suite.
-
-  [ Hideki Yamane ]
-  * Fix "Fails when run from path containing space character" (Closes: #947173)
-  * Remove some quote for variables since somehow wget fails with ""
-    (double quote with no value)
-
- -- Hideki Yamane <henrich@debian.org>  Tue, 11 Feb 2020 21:15:26 +0900
-
-debootstrap (1.0.116) unstable; urgency=medium
-
-  [ Hideki Yamane ]
-  * use salsa-pipeline for CI, instead of custom rule
-  * disable unnecessary blhc and test-build-any CI test
-
-  [ Philip Hands ]
-  * disable the failing autopkgtest job
-  * provide support for Devuan release names
-
- -- Hideki Yamane <henrich@debian.org>  Sun, 29 Sep 2019 10:56:48 +0900
-
-debootstrap (1.0.115) unstable; urgency=medium
-
-  [ Cyril Brulebois ]
-  * Remove Christian Perrier from Uploaders, with many thanks for all
-    his contributions over the years! (Closes: #927549)
-
-  [ Hideki Yamane ]
-  * debian/control
-    - Remove Junichi Uekawa <dancer@debian.org> from Uploaders with ack
-  * scripts
-    - Add (Ubuntu) eoan as a symlink to gutsy.
-
- -- Hideki Yamane <henrich@debian.org>  Sat, 06 Jul 2019 20:22:30 +0900
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 22 Mar 2019 10:14:55 +0100
 
 debootstrap (1.0.114) unstable; urgency=medium
 
@@ -226,12 +110,12 @@ debootstrap (1.0.107) unstable; urgency=medium
   * Strip URL scheme from apt lists (Closes: #903481)
 
   [ Hideki Yamane ]
-  * Fix docker detection breaks QEMU's binfmt_misc bootstraping
+  * Fix docker detection breaks QEMU's binfmt_misc bootstraping 
     (Closes: #903657)
     - Avoid removing host's /proc on some environment
     - Add workaround for second-stage inside docker
   * Align scripts/gutsy to scripts/debian-common
-  * Remove unnecessary script files from udeb package
+  * Remove unnecessary script files from udeb package 
     (Closes: #618839, #893713)
 
  -- Hideki Yamane <henrich@debian.org>  Thu, 26 Jul 2018 19:12:20 +0900
@@ -434,7 +318,7 @@ debootstrap (1.0.96) unstable; urgency=medium
 
 debootstrap (1.0.95) unstable; urgency=medium
 
-  * Really fix #894415 (Closes: #894415)
+  * Really fix #894415 (Closes: #894415) 
 
  -- Hideki Yamane <henrich@debian.org>  Sat, 31 Mar 2018 13:28:26 +0900
 
@@ -483,10 +367,23 @@ debootstrap (1.0.93+nmu1) unstable; urgency=medium
   * Change repository URI for old Ubuntu releases (Closes: #676370, #839073)
     Archived Ubuntu releases are at old-releases.ubuntu.com/ubuntu
   * Set correct keyring and default mirror for old debian releases.
-    Now you can fetch potato/woody/sarge/etch/lenny/squeeze if you want.
+    Now you can fetch popato/woody/sarge/etch/lenny/squeeze if you want.
     (Closes: #891404, #600647, #792729)
 
  -- Hideki Yamane <henrich@debian.org>  Mon, 05 Mar 2018 22:28:22 +0900
+
+debootstrap (1.0.93+parrot2) testing; urgency=medium
+
+  * Include parrot-archive-keyring
+  * Include stable, testing and unstable releases in d-i.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Sun, 21 Jan 2018 03:32:38 +0100
+
+debootstrap (1.0.93+parrot1) testing; urgency=medium
+
+  * Import new debian release.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@localhost.localdomain>  Sat, 20 Jan 2018 00:16:40 +0100
 
 debootstrap (1.0.93) unstable; urgency=medium
 
@@ -515,6 +412,13 @@ debootstrap (1.0.91) unstable; urgency=medium
 
  -- Christian Perrier <bubulle@debian.org>  Wed, 26 Jul 2017 06:53:10 +0200
 
+debootstrap (1.0.90+parrot0) testing; urgency=medium
+
+  * Import Debian version.
+  * Import Parrot scripts.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 05 Jul 2017 14:25:24 +0200
+
 debootstrap (1.0.90) unstable; urgency=medium
 
   [ Mattia Rizzolo ]
@@ -536,12 +440,30 @@ debootstrap (1.0.89) unstable; urgency=medium
 
  -- Cyril Brulebois <kibi@debian.org>  Fri, 10 Mar 2017 13:10:56 +0100
 
+debootstrap (1.0.88+parrot0) testing; urgency=medium
+
+  * Update parrot mirror address.
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Wed, 05 Jul 2017 13:46:27 +0200
+
 debootstrap (1.0.88) unstable; urgency=high
 
   [ Sven Joachim ]
   * Strip the arch-qualifier (Closes: #836525)
 
  -- Steve McIntyre <93sam@debian.org>  Wed, 08 Feb 2017 23:53:10 +0000
+
+debootstrap (1.0.87+parrot1) testing; urgency=medium
+
+  * Re-include stable and testing scripts in d-i package
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Tue, 14 Feb 2017 03:42:48 +0100
+
+debootstrap (1.0.87+parrot0) testing; urgency=medium
+
+  * Import new Debian release
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Fri, 06 Jan 2017 22:19:06 +0100
 
 debootstrap (1.0.87) unstable; urgency=high
 
@@ -621,12 +543,41 @@ debootstrap (1.0.82) unstable; urgency=medium
 
  -- Christian Perrier <bubulle@debian.org>  Thu, 08 Sep 2016 07:09:56 +0200
 
+
+debootstrap (1.0.81+parrot2) testing; urgency=medium
+
+  * Don't remove stable and testing scripts from debian-installer
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Mon, 18 Jul 2016 20:09:41 +0200
+
+debootstrap (1.0.81+parrot1) testing; urgency=medium
+
+  * Minor fixes to parrot scripts
+
+ -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Sun, 15 May 2016 01:14:25 +0400
+
+debootstrap (1.0.81+parrot0) testing; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - add parrot specific bootstrap scripts
+    - use parrot-archive-keyring instead of debian-archive-keyring in Recommends
+
+ -- Lisetta "Sheireen" Ferrero <sheireen@autistiche.org>  Wed, 11 May 2016 11:14:38 +0400
+
 debootstrap (1.0.81) unstable; urgency=medium
 
   [ Luca Falavigna ]
   * Add (Ubuntu) yakkety as a symlink to gutsy.
 
  -- Christian Perrier <bubulle@debian.org>  Tue, 03 May 2016 06:51:57 +0200
+
+debootstrap (1.0.80+parrot0) testing; urgency=medium
+
+  * Sync with Debian. Remaining changes:
+    - random fixes
+    - use parrot-archive-keyring instead of debian-archive-keyring
+
+ -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 28 Apr 2016 13:56:48 +0200
 
 debootstrap (1.0.80) unstable; urgency=medium
 

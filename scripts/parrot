@@ -1,14 +1,9 @@
-
-# For Parrot Security LTS
-# Parrot OS: https://www.parrotsec.org/ 
-# Contact: https://www.parrotsec.org/team/
-
+default_mirror http://mirror.parrot.sh/mirrors/parrot
 mirror_style release
 download_style apt
 finddebs_style from-indices
 variants - buildd fakechroot minbase
 keyring /usr/share/keyrings/parrot-archive-keyring.gpg
-default_mirror https://deb.parrotsec.org/parrot/
 
 if doing_variant fakechroot; then
 	test "$FAKECHROOT" = "true" || error 1 FAKECHROOTREQ "This variant requires fakechroot environment to be started"
@@ -28,9 +23,6 @@ work_out_debs () {
 		#required="$required $(get_debs Priority: important)"
 		#  ^^ should be getting debconf here somehow maybe
 		base="$(get_debs Priority: important)"
-
-		# Install some basic packages required for Parrot OS
-		base="$base parrot-archive-keyring ca-certificates gnupg2 parrot-core"
 	elif doing_variant buildd; then
 		base="apt build-essential"
 	elif doing_variant minbase; then
@@ -42,18 +34,18 @@ work_out_debs () {
 		required="$required binutils"
 	fi
 
-	case $MIRRORS in
-	    https://*)
-		base="$base ca-certificates"
-		;;
-	esac
+	base="$base ca-certificates"
 }
 
 first_stage_install () {
-	MERGED_USR="yes"
-	EXTRACT_DEB_TAR_OPTIONS="$EXTRACT_DEB_TAR_OPTIONS -k"
+	case "$CODENAME" in
+		etch|etch-m68k|jessie|jessie-kfreebsd|lenny|squeeze|wheezy) ;;
+		*)
+			EXTRACT_DEB_TAR_OPTIONS="$EXTRACT_DEB_TAR_OPTIONS -k"
+			setup_merged_usr
+			;;
+	esac
 
-	setup_merged_usr
 	extract $required
 
 	mkdir -p "$TARGET/var/lib/dpkg"
@@ -158,12 +150,6 @@ Status: install ok installed" >> "$TARGET/var/lib/dpkg/status"
 		dpkg_progress $baseprog $bases UNPACKREQ "Unpacking required packages" UNPACKING
 
 	info CONFREQ "Configuring required packages..."
-
-	if doing_variant fakechroot && [ -e "$TARGET/var/lib/dpkg/info/initscripts.postinst" ]
-	then
-		# fix initscripts postinst (no mounting possible, and wrong if condition)
-		sed -i '/dpkg.*--compare-versions/ s/\<lt\>/lt-nl/' "$TARGET/var/lib/dpkg/info/initscripts.postinst"
-	fi
 
 	echo \
 "#!/bin/sh
