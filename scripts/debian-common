@@ -29,7 +29,15 @@ work_out_debs () {
 
 	case $MIRRORS in
 	    https://*)
-		base="$base apt-transport-https ca-certificates"
+		case "$CODENAME" in
+			# apt-transport-https exists from lenny to stretch
+			lenny|squeeze|wheezy|jessie*|stretch)
+			base="$base apt-transport-https ca-certificates"
+			;;
+			*)
+			base="$base ca-certificates"
+			;;
+		esac
 		;;
 	esac
 }

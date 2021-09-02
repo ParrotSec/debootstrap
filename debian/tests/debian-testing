@@ -179,7 +179,7 @@ sub check_chroot {
 # Specify https mirror to check https mirror specific problem
 # https://bugs.debian.org/896071
 my $mirror = 'https://deb.debian.org/debian';
-my $tmp = $ENV{AUTOPKGTEST_TMP} || $ENV{ADTTMP};
+my $tmp = $ENV{AUTOPKGTEST_TMP} || $ENV{AUTOPKGTEST_TMP};
 die "no autopkgtest temporary directory specified" unless $tmp;
 chdir $tmp or die "chdir $tmp: $!";
 
@@ -282,7 +282,7 @@ elsif (! -d '/run/systemd/system') {
 }
 else {
     if (!verbose_run(['systemd-nspawn', '-D', 'chroot.d',
-            "--bind=$ENV{ADTTMP}:/mnt",
+            "--bind=$ENV{AUTOPKGTEST_TMP}:/mnt",
             '--bind-ro=/usr/sbin/debootstrap',
             '--bind-ro=/usr/share/debootstrap',
             '--',
@@ -291,7 +291,7 @@ else {
         BAIL_OUT("debootstrap wrapped in systemd-nspawn failed: $?");
     }
 
-    check_chroot(chroot => "$ENV{ADTTMP}/from-nspawn.d", can_mknod_ptmx => 0,
+    check_chroot(chroot => "$ENV{AUTOPKGTEST_TMP}/from-nspawn.d", can_mknod_ptmx => 0,
         kernel => $kernel, container => "nspawn");
 }
 
