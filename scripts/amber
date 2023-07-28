@@ -1,6 +1,6 @@
 
 # For PureOS "amber"
-# PureOS: https://www.pureos.net/ 
+# PureOS: https://www.pureos.net/
 # Contact: https://tracker.pureos.net/
 
 mirror_style release
@@ -24,17 +24,18 @@ esac
 work_out_debs () {
 	required="$(get_debs Priority: required)"
 
+	base="pureos-archive-keyring"
 	if doing_variant - || doing_variant fakechroot; then
 		#required="$required $(get_debs Priority: important)"
 		#  ^^ should be getting debconf here somehow maybe
-		base="$(get_debs Priority: important)"
+		base="$base $(get_debs Priority: important)"
 
 		# we want the PureOS minimal dependency set to be installed
 		base="$base pureos-minimal"
 	elif doing_variant buildd; then
-		base="apt build-essential"
+		base="$base apt build-essential"
 	elif doing_variant minbase; then
-		base="apt"
+		base="$base apt"
 	fi
 
 	if doing_variant fakechroot; then

@@ -9,3 +9,11 @@ Depends:
  systemd-container [linux-any],
  ca-certificates,
 Restrictions: allow-stderr, needs-root
+
+Tests: unsorted-packages-files
+Depends:
+ debootstrap,
+ python3-debian,
+ python3-flask,
+ python3-requests,
+Restrictions: allow-stderr

@@ -1,9 +1,123 @@
-debootstrap (1.0.125+parrot1) lts-updates; urgency=medium
+debootstrap (1.0.128+parrot1) lory-updates; urgency=medium
 
-  * Add Parrot OS to scripts dir.
-  * Add Parrot-specific aliases.
+  * Add Parrot Security bootstrap scripts.
 
- -- Lorenzo "Palinuro" Faletra <palinuro@parrotsec.org>  Thu, 02 Sep 2021 16:17:01 +0200
+ -- Lorenzo "Palinuro" Faletra <palinuro@localhost.localdomain>  Fri, 28 Jul 2023 23:47:39 +0200
+
+debootstrap (1.0.128+nmu2) unstable; urgency=low
+
+  * Non-maintainer upload.
+
+  [ Matthias Klumpp ]
+  * Update PureOS bootstrap script
+
+  [ Luca Boccassi ]
+  * autopkgtest: fix running on !amd64
+  * autopkgtest: run on 'testing' instead of 'bookworm'
+
+ -- Luca Boccassi <bluca@debian.org>  Tue, 18 Oct 2022 23:49:31 +0100
+
+debootstrap (1.0.128+nmu1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * autopkgtest: add /usr/sbin to PATH
+
+ -- Luca Boccassi <bluca@debian.org>  Mon, 17 Oct 2022 10:45:01 +0100
+
+debootstrap (1.0.128) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * Make gbp tag produce the right tag format
+
+  [ Carsten Schoenert ]
+  * Add (PureOS) byzantium as a symlink to amber
+  * Add (PureOS) crimson as a symlink to amber
+
+  [ Daniel Watkins ]
+  * Support Packages files which are not ordered alphabetically by Package field
+    (LP: #1990856)
+
+  [ Dimitri John Ledkov ]
+  * d/tests/unsorted-packages-files: cleanup temp files and daemon
+
+  [ Tianon Gravi ]
+  * Apply "EXCLUDE_DEPENDENCY" during "resolve_deps"
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Fri, 14 Oct 2022 12:31:04 +0100
+
+debootstrap (1.0.127+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Ansgar ]
+  * debootstrap: optionally exclude specific dependencies
+  * debian-common: exclude usrmerge when installing usr-is-merged
+
+  [ Samuel Thibault ]
+  * Enable usrmerge on hurd-i386 too.
+
+ -- Luca Boccassi <bluca@debian.org>  Sat, 24 Sep 2022 14:07:46 +0100
+
+debootstrap (1.0.127) unstable; urgency=medium
+
+  [ Heysion Yuan ]
+  * add usrmerge support loongarch64.
+
+  [ Paul Menzel ]
+  * Avoid duplicate components in `sources.list`.
+
+  [ Edward Tomasz Napierala ]
+  * Mount /dev/fd if the host is FreeBSD.
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 12 to 13.
+  * Update renamed lintian tag names in lintian overrides.
+
+  [ Luca Falavigna ]
+  * Add (Ubuntu) kinetic as a symlink to gutsy.
+  * Update standards version to 4.6.0.1, no changes needed.
+
+  [ Luca Boccassi ]
+  * setup_merged_usr: create skip flag when merged-usr is disabled on bookworm+
+  * Add usr-is-merged to the required set on testing/unstable
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Mon, 25 Jul 2022 13:25:39 +0100
+
+debootstrap (1.0.126+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Undo the changes of the last upload. (Closes: #998867)
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Sun, 28 Nov 2021 12:38:15 +0100
+
+debootstrap (1.0.126) unstable; urgency=low
+
+  * Ensure bookworm+ suites are set up with merged-usr. (Closes: #978636)
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Mon, 08 Nov 2021 14:40:06 +0000
+
+debootstrap (1.0.125) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * functions (download_main): Let the loops try the different components and
+    suites when the checksum doesn't match. This is needed when several of
+    them contain the same package name.
+
+  [ Arnaud Rebillout ]
+  * Fix auto proxy discovery (Closes: #985811)
+  * Fix detection of docker container for cgroup v2 (Closes: #985481)
+
+  [ Johannes 'josch' Schauer ]
+  * functions: define link_dir before using it.
+
+  [ Hideki Yamane ]
+  * Add (Debian) trixie as a symlink to sid.
+
+  [ Dimitri John Ledkov ]
+  * Add (Ubuntu) jammy as a symlink to gutsy.
+  * Upload to unstable.
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Tue, 02 Nov 2021 11:35:00 +0000
 
 debootstrap (1.0.124) experimental; urgency=medium
 
